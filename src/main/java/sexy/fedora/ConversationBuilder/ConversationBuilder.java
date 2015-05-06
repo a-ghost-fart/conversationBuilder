@@ -1,50 +1,54 @@
 package sexy.fedora.ConversationBuilder;
 
 import javax.swing.*;
+import javax.swing.tree.DefaultMutableTreeNode;
+import java.awt.*;
 import java.awt.event.*;
 
 public class ConversationBuilder extends JDialog {
     private JPanel contentPane;
-    private JButton buttonOK;
-    private JButton buttonCancel;
+    private JButton buttonExport;
+    private JButton buttonAddTree;
+    private JTree conversationTree;
 
     public ConversationBuilder() {
         setContentPane(contentPane);
         setModal(true);
-        getRootPane().setDefaultButton(buttonOK);
+        getRootPane().setDefaultButton(buttonExport);
 
-        buttonOK.addActionListener(new ActionListener() {
+        buttonExport.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                onOK();
+                onExport();
             }
         });
 
-        buttonCancel.addActionListener(new ActionListener() {
+        buttonAddTree.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                onCancel();
+                onAddTree();
             }
         });
 
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
-                onCancel();
+                dispose();
             }
         });
 
         contentPane.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                onCancel();
+                dispose();
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
-    private void onOK() {
-        dispose();
+    private void onExport() {
+        System.out.println("Do some kind of export, lol.");
     }
 
-    private void onCancel() {
-        dispose();
+    private void onAddTree() {
+        ConversationTree tree = new ConversationTree();
+        System.out.println(tree.toString());
     }
 
     public static void main(String[] args) {
